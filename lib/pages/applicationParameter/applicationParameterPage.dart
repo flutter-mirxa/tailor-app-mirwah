@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailor_app_mirwah_mirxa/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ApplicationParameterPage extends StatefulWidget {
@@ -32,7 +33,10 @@ class _ApplicationParameterPageState extends State<ApplicationParameterPage> {
                   children: [
                     CircleAvatar(
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, MyRoutes.addEditSuitTypeRoute);
+                        },
                         icon: const Icon(Icons.add),
                       ),
                     ),

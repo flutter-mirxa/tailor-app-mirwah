@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tailor_app_mirwah_mirxa/pages/applicationParameterPage.dart';
-import 'package:tailor_app_mirwah_mirxa/pages/forgotPasswordPage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/applicationParameter/addEditSuitTypePage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/applicationParameter/addParameterPage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/applicationParameter/applicationParameterPage.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/homePage.dart';
-import 'package:tailor_app_mirwah_mirxa/pages/loginPage.dart';
-import 'package:tailor_app_mirwah_mirxa/pages/registerPage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/profile/forgotPasswordPage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/profile/loginPage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/profile/registerPage.dart';
 import 'package:tailor_app_mirwah_mirxa/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -24,193 +26,196 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       routes: {
-        "/": (context) => const LoginPage(),
+        "/": (context) => const RegisterPage(),
         MyRoutes.loginRoute: (context) => const LoginPage(),
         MyRoutes.registerRoute: (context) => const RegisterPage(),
         MyRoutes.forgotPasswordRoute: (context) => const ForgotPasswordPage(),
         MyRoutes.homeRoute: (context) => const HomePage(),
         MyRoutes.applicationParameterRoute: (context) =>
             const ApplicationParameterPage(),
-        MyRoutes.addEditSuitTypeRoute: (context) => const AddEditSuitTypePage()
+        MyRoutes.addEditSuitTypeRoute: (context) => const AddEditSuitTypePage(),
+        MyRoutes.addParameterRoute: (context) => const AddParameterPage()
       },
     );
   }
 }
 
-class AddEditSuitTypePage extends StatefulWidget {
-  const AddEditSuitTypePage({Key? key}) : super(key: key);
+class CustomersPage extends StatefulWidget {
+  const CustomersPage({Key? key}) : super(key: key);
 
   @override
-  State<AddEditSuitTypePage> createState() => _AddEditSuitTypePageState();
+  _CustomersPageState createState() => _CustomersPageState();
 }
 
-class _AddEditSuitTypePageState extends State<AddEditSuitTypePage> {
-  bool isEdit = false;
-
+class _CustomersPageState extends State<CustomersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Add/Edit Suit Type: Shirt".text.make(),
+        title: "Customers".text.make(),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Suit Name *",
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width - 20.0,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(border: Border.all(width: 1)),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                        ),
+                        hintText: "search",
+                        prefixIcon: Icon(Icons.search),
+                      ),
+                    ).w64(context),
+                    CircleAvatar(
+                      child: IconButton(
+                        icon: Icon(Icons.add),
+                        onPressed: () {},
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Price *",
+                const SizedBox(
+                  height: 10.0,
                 ),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Cost *",
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CircleAvatar(
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.add),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Table(
-                border: TableBorder.all(width: 1),
-                columnWidths: {
-                  0: FlexColumnWidth(100),
-                  1: FlexColumnWidth(100),
-                  2: FlexColumnWidth(70),
-                  3: FlexColumnWidth(100),
-                  4: FlexColumnWidth(100),
-                },
-                children: [
-                  TableRow(
-                    decoration: const BoxDecoration(
-                      color: Colors.amberAccent,
-                    ),
-                    children: [
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Parameter"
-                              .text
-                              .bold
-                              .textStyle(const TextStyle(fontSize: 11))
-                              .make(),
-                        ),
+                Table(
+                  border: TableBorder.all(width: 1),
+                  columnWidths: {
+                    0: FlexColumnWidth(2),
+                    1: FlexColumnWidth(1),
+                    2: FlexColumnWidth(1),
+                    3: FlexColumnWidth(1),
+                    4: FlexColumnWidth(1),
+                  },
+                  children: [
+                    TableRow(
+                      decoration: const BoxDecoration(
+                        color: Colors.amberAccent,
                       ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Data Type"
-                              .text
-                              .bold
-                              .textStyle(const TextStyle(fontSize: 11))
-                              .make(),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Limit"
-                              .text
-                              .bold
-                              .textStyle(const TextStyle(fontSize: 11))
-                              .make(),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Required"
-                              .text
-                              .bold
-                              .textStyle(const TextStyle(fontSize: 11))
-                              .make(),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Action"
-                              .text
-                              .bold
-                              .textStyle(const TextStyle(fontSize: 11))
-                              .make(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Sleeve Length"
-                              .text
-                              .textStyle(const TextStyle(fontSize: 11))
-                              .make(),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "num".text.textStyle(const TextStyle()).make(),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child:
-                              "10-15".text.textStyle(const TextStyle()).make(),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
+                      children: [
+                        TableCell(
+                          child: Padding(
                             padding: const EdgeInsets.all(10),
-                            child: Switch(
-                              onChanged: (val) {
-                                setState(() {
-                                  isEdit = val;
-                                });
-                              },
-                              value: isEdit,
-                            )),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: "Edit"
-                              .text
-                              .bold
-                              .textStyle(const TextStyle())
-                              .make(),
+                            child: "Parameter"
+                                .text
+                                .bold
+                                .textStyle(const TextStyle(fontSize: 11))
+                                .make(),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "Data Type"
+                                .text
+                                .bold
+                                .textStyle(const TextStyle(fontSize: 11))
+                                .make(),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "Limit"
+                                .text
+                                .bold
+                                .textStyle(const TextStyle(fontSize: 11))
+                                .make(),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "Req."
+                                .text
+                                .bold
+                                .textStyle(const TextStyle(fontSize: 11))
+                                .make(),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "Action"
+                                .text
+                                .bold
+                                .textStyle(const TextStyle(fontSize: 11))
+                                .make(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "Sleeve Length"
+                                .text
+                                .textStyle(const TextStyle(fontSize: 11))
+                                .make(),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child:
+                                "num".text.textStyle(const TextStyle()).make(),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "10-15"
+                                .text
+                                .textStyle(const TextStyle())
+                                .make(),
+                          ),
+                        ),
+                        TableCell(
+                          child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Switch(
+                                onChanged: (val) {
+                                  setState(() {
+                                    //  isEdit = val;
+                                  });
+                                },
+                                value: false,
+                              )),
+                        ),
+                        TableCell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: "Edit"
+                                .text
+                                .bold
+                                .textStyle(const TextStyle())
+                                .make(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ).positioned(top: 20),
+          "Register Customers List"
+              .text
+              .bold
+              .textStyle(const TextStyle(backgroundColor: Colors.white))
+              .make()
+              .positioned(top: 10, left: 20),
+        ],
       ),
     );
   }

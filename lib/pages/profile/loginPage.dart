@@ -101,7 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, MyRoutes.homeRoute);
+                          },
                           child: "Login".text.make(),
                         )
                       ],
@@ -127,11 +129,17 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: 20.0,
                         ),
-                        "Register as Tailor"
-                            .text
-                            .underline
-                            .color(Colors.blueAccent)
-                            .make(),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, MyRoutes.registerRoute);
+                          },
+                          child: "Register as Tailor"
+                              .text
+                              .underline
+                              .color(Colors.blueAccent)
+                              .make(),
+                        )
                       ],
                     ),
                   ],
