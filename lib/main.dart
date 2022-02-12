@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/applicationParameter/addEditSuitTypePage.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/applicationParameter/addParameterPage.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/applicationParameter/applicationParameterPage.dart';
+import 'package:tailor_app_mirwah_mirxa/pages/customer/customersPage.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/homePage.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/profile/forgotPasswordPage.dart';
 import 'package:tailor_app_mirwah_mirxa/pages/profile/loginPage.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       routes: {
-        "/": (context) => const RegisterPage(),
+        "/": (context) => const AddEditCustomerPage(),
         MyRoutes.loginRoute: (context) => const LoginPage(),
         MyRoutes.registerRoute: (context) => const RegisterPage(),
         MyRoutes.forgotPasswordRoute: (context) => const ForgotPasswordPage(),
@@ -34,188 +35,95 @@ class MyApp extends StatelessWidget {
         MyRoutes.applicationParameterRoute: (context) =>
             const ApplicationParameterPage(),
         MyRoutes.addEditSuitTypeRoute: (context) => const AddEditSuitTypePage(),
-        MyRoutes.addParameterRoute: (context) => const AddParameterPage()
+        MyRoutes.addParameterRoute: (context) => const AddParameterPage(),
+        MyRoutes.customersRoute: (context) => const CustomersPage(),
       },
     );
   }
 }
 
-class CustomersPage extends StatefulWidget {
-  const CustomersPage({Key? key}) : super(key: key);
+class AddEditCustomerPage extends StatefulWidget {
+  const AddEditCustomerPage({Key? key}) : super(key: key);
 
   @override
-  _CustomersPageState createState() => _CustomersPageState();
+  _AddEditCustomerPageState createState() => _AddEditCustomerPageState();
 }
 
-class _CustomersPageState extends State<CustomersPage> {
+class _AddEditCustomerPageState extends State<AddEditCustomerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Customers".text.make(),
+        title: "Add/Edit Customer".text.make(),
       ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width - 20.0,
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(border: Border.all(width: 1)),
-            child: Column(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                Image.asset(
+                  'images/avatar.png',
+                  width: 200,
+                  height: 200,
+                ),
+              ],
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: "Code",
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: "Name",
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                "Register Via".text.make(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(40)),
-                        ),
-                        hintText: "search",
-                        prefixIcon: Icon(Icons.search),
-                      ),
-                    ).w64(context),
-                    CircleAvatar(
-                      child: IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed: () {},
-                      ),
-                    )
+                    Radio(value: 1, groupValue: 1, onChanged: (val) {}),
+                    "Email Address".text.make(),
                   ],
                 ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Table(
-                  border: TableBorder.all(width: 1),
-                  columnWidths: {
-                    0: FlexColumnWidth(2),
-                    1: FlexColumnWidth(1),
-                    2: FlexColumnWidth(1),
-                    3: FlexColumnWidth(1),
-                    4: FlexColumnWidth(1),
-                  },
+                Row(
                   children: [
-                    TableRow(
-                      decoration: const BoxDecoration(
-                        color: Colors.amberAccent,
-                      ),
-                      children: [
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Parameter"
-                                .text
-                                .bold
-                                .textStyle(const TextStyle(fontSize: 11))
-                                .make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Data Type"
-                                .text
-                                .bold
-                                .textStyle(const TextStyle(fontSize: 11))
-                                .make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Limit"
-                                .text
-                                .bold
-                                .textStyle(const TextStyle(fontSize: 11))
-                                .make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Req."
-                                .text
-                                .bold
-                                .textStyle(const TextStyle(fontSize: 11))
-                                .make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Action"
-                                .text
-                                .bold
-                                .textStyle(const TextStyle(fontSize: 11))
-                                .make(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Sleeve Length"
-                                .text
-                                .textStyle(const TextStyle(fontSize: 11))
-                                .make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child:
-                                "num".text.textStyle(const TextStyle()).make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "10-15"
-                                .text
-                                .textStyle(const TextStyle())
-                                .make(),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Switch(
-                                onChanged: (val) {
-                                  setState(() {
-                                    //  isEdit = val;
-                                  });
-                                },
-                                value: false,
-                              )),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: "Edit"
-                                .text
-                                .bold
-                                .textStyle(const TextStyle())
-                                .make(),
-                          ),
-                        ),
-                      ],
-                    ),
+                    Radio(value: 2, groupValue: 1, onChanged: (val) {}),
+                    "Mobile No.".text.make(),
                   ],
                 ),
               ],
             ),
-          ).positioned(top: 20),
-          "Register Customers List"
-              .text
-              .bold
-              .textStyle(const TextStyle(backgroundColor: Colors.white))
-              .make()
-              .positioned(top: 10, left: 20),
-        ],
+            const SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: "Email Address",
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: "Mobile No.",
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              children: [
+                "Registration Date".text.make(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
