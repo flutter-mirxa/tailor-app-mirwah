@@ -15,5 +15,5 @@ class MyRoutes {
   //customer routes
   static String customersRoute = "/customers";
   static String addEditCustomerRoute = "/ae_customer";
-  static String customerDetailRoute = "/customer_detail";
+  static String addEditCustomerSuitRoute = "/ae_customer_suit";
 }

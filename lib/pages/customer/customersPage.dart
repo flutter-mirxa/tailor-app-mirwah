@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tailor_app_mirwah_mirxa/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CustomersPage extends StatefulWidget {
@@ -39,7 +40,10 @@ class _CustomersPageState extends State<CustomersPage> {
                     CircleAvatar(
                       child: IconButton(
                         icon: Icon(Icons.add),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, MyRoutes.addEditCustomerRoute);
+                        },
                         tooltip: "Add Customer",
                       ),
                     )

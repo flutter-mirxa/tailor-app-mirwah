@@ -23,6 +23,9 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             title: "Customer".text.make(),
+            onTap: () {
+              Navigator.pushNamed(context, MyRoutes.customersRoute);
+            },
           ),
           ListTile(
             title: "Reports".text.make(),

@@ -6,6 +6,10 @@ auto_size_text_pk
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text_pk-3.0.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text_pk-3.0.0/lib/
+badges
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/badges-2.0.2/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/badges-2.0.2/lib/
 boolean_selector
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/
@@ -38,6 +42,14 @@ flutter_lints
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib/
+http
+2.14
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib/
+http_parser
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/lib/
 intl
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/
