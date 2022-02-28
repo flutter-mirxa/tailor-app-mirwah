@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tailor_app_mirwah_mirxa/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,11 +15,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isPasswordShow = false;
+
   TextEditingController userIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   final _loginFormKey = GlobalKey<FormState>();
   final _loginAuthApi =
       'http://tailorapi.mirwah.com/api/Authenticate/Authenticate';
+
+  final storage = const FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                   top: 150.0,
                 ),
             Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 width: MediaQuery.of(context).size.width - 50.0,
                 decoration: BoxDecoration(
                   border: Border.all(),
@@ -57,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (val) {},
                             validator: (val) {
                               if (val!.isEmpty) {
-                                return "Please enter user id first!";
+                                return "Please enter user id!";
                               } else if (val.length < 4) {
                                 return "UserId should be atleast 4 characters";
                               } else {
@@ -89,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (val) {},
                             validator: (val) {
                               if (val!.isEmpty) {
-                                return "Please enter password first!";
+                                return "Please enter password!";
                               } else if (val.length < 4) {
                                 return "Password should be atleast 4 characters";
                               } else {
@@ -135,14 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {
-                              if (userValidation()) {
-                                Navigator.pushReplacementNamed(
-                                    context, MyRoutes.homeRoute);
-                              }
-                            },
+                            onPressed: userValidation,
                             child: "Login".text.make(),
-                          )
+                          ),
                         ],
                       )
                     ],
@@ -202,22 +204,32 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  bool userValidation() {
+  void userValidation() {
     if (_loginFormKey.currentState!.validate()) {
       checkUserAuthentication();
     }
-    return false;
   }
 
   checkUserAuthentication() async {
     var response = await http.post(Uri.parse(_loginAuthApi), body: {
-      "user_name": "124",
+      "user_name": userIdController.text,
       "password": passwordController.text,
     });
-    print(response.statusCode);
-    print(response.body);
-    if (response.statusCode == 200) {
-      Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+    if (response.statusCode == 200 && response.body.toString() != "null") {
+      var registerName = jsonDecode(response.body)['sUserId'];
+
+      //save in secure storage
+      await storage.write(key: "userCredentials", value: response.body);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: "Logged In as $registerName".text.make()));
+      Navigator.pushNamedAndRemoveUntil(
+          context, MyRoutes.homeRoute, (route) => false);
+    } else {
+      passwordController.text = "";
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: "User Id or Password was incorrect!".text.make()));
     }
   }
 }
